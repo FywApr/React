@@ -4,9 +4,3 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-ul li {
-  width: 500px;
-  padding: 50px 30px;
-}
