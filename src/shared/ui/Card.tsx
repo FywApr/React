@@ -31,12 +31,9 @@ export const Card: FC<Props> = function Card(props) {
   } = props;
 
   return (
-    <li {...rest} className={`${backgroundColor} ${border} ${borderColor}`}>
-      <Title color={color} textSize="text-xl">
-        {"Заголовок"}
-      </Title>
-      <Paragraph color={color}>{"Описание карточки"}</Paragraph>
-      <Button mode={buttonType}>{"Кнопка"}</Button>
-    </li>
+    <li
+      {...rest}
+      className={`${backgroundColor} ${border} ${borderColor}`}
+    ></li>
   );
 };
