@@ -7,6 +7,14 @@ interface Props {}
 
 export const Product: FC<Props> = function Product() {
   const { productID } = useParams({ from: "/products/$productID" });
-  const product = products.find((item) => item.id === Number(productID));
-  return <Typography>{product?.name}</Typography>;
+  const product = products.find((item) => item.id === productID);
+  return (
+    <>
+      <Typography>{product?.year}</Typography>
+      <Typography>{product?.color}</Typography>
+      <Typography>{product?.price}</Typography>
+      <Typography>{product?.model}</Typography>
+      <Typography>{product?.brand}</Typography>
+    </>
+  );
 };

@@ -1,7 +1,5 @@
 import { FC } from "react";
 import { Button } from "../shared/ui/Button";
-import { Title } from "../shared/ui/Title";
-import { Paragraph } from "../shared/ui/Paragraph";
 import { Card } from "../shared/ui/Card";
 import { Typography } from "../shared/ui/Typography";
 import { COLORS_TEXT } from "../shared/ui/colors";
@@ -30,24 +28,6 @@ export const Header: FC<Props> = function Header(props) {
           {"dark"}
         </Button>
 
-        <Title border="border-8" textSize="text-base">
-          {"Что там"}
-        </Title>
-        <Title border="border-4" textSize="text-lg">
-          {"Что там"}
-        </Title>
-        <Title border="border-2" textSize="text-xl">
-          {"Что там"}
-        </Title>
-
-        <Paragraph border="border-2">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis,
-          delectus!
-        </Paragraph>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis,
-          delectus!
-        </Paragraph>
 
         <ul>
           <Card

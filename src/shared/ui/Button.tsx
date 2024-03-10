@@ -9,7 +9,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button: FC<Props> = function Button(props) {
   const { mode = "default", ...rest } = props; // rest берет все атрибуты в компонгенте Header
 
-  let bgButton = "bg-blue-400";
+  let bgButton = "bg-black";
   let textColor = "text-white";
 
   if (mode === "dark") {

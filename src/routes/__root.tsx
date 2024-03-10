@@ -8,16 +8,15 @@ export const Route = createRootRoute({
         <Link to="/" className="[&.active]:font-bold">
           {"Главная"}
         </Link>
-        <Link to="/about" className="[&.active]:font-bold">
-          {"Вторая"}
-        </Link>
         <Link to="/products" className="[&.active]:font-bold">
-          {"Товары"}
+          {"Машины"}
         </Link>
       </div>
-      <div className="p-2">
-        <Outlet />
-      </div>
+      <div className="container mx-auto p-2">
+        {/* Вывод компонентов */}
+        <Outlet /> 
+        </div>
+      {/* Панель разработчика */}
       <TanStackRouterDevtools />
     </>
   ),
