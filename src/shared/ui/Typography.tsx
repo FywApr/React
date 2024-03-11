@@ -17,7 +17,7 @@ export const Typography: FC<Props> = function Typography(props) {
     size = 16,
     weight = 400,
     color = COLORS_TEXT.primary,
-    align = "center",
+    align = "left",
     ...rest
   } = props;
 

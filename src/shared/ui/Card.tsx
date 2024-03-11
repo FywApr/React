@@ -1,29 +1,9 @@
-import { FC, LiHTMLAttributes } from "react";
+import { FC, HTMLAttributes } from "react";
 
-type TBackgroundColor = "bg-gray-700" | "bg-white" | "bg-slate-500";
-type TBorder = "border-2";
-type TBorderColor = "border-white";
-type TColor = "text-white" | "text-black";
-type TButton = "default" | "border" | "dark";
-
-interface Props extends LiHTMLAttributes<HTMLLIElement> {
-  backgroundColor?: TBackgroundColor;
-  border?: TBorder;
-  borderColor?: TBorderColor;
-  color?: TColor;
-  buttonType?: TButton;
-}
-
-export const Card: FC<Props> = function Card(props) {
-  const {
-    backgroundColor = "bg-lime-400",
-    border = "border-0",
-    borderColor = "border-white",
-    ...rest
-  } = props;
-
+export const Card: FC<HTMLAttributes<HTMLDivElement>> = function Card(props) {
   return (
-    <li {...rest} className={`flex flex-col w-80 p-10 rounded shadow-xl text-center ${backgroundColor} ${border} ${borderColor}`}>
-    </li>
+    <div className={`mx-auto p-4 mt-4 rounded-lg ${props.className}`}>
+      {props.children}
+    </div>
   );
 };

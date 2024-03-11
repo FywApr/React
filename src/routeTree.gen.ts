@@ -12,8 +12,10 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as ProductsIndexImport } from './routes/products/index'
-import { Route as ProductsProductIDImport } from './routes/products/$productID'
+import { Route as NotesIndexImport } from './routes/notes/index'
+import { Route as NotesAddImport } from './routes/notes/add'
+import { Route as NotesNoteIdImport } from './routes/notes/$noteId'
+import { Route as NotesNoteIdEditImport } from './routes/notes/$noteId.edit'
 
 // Create/Update Routes
 
@@ -22,14 +24,24 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ProductsIndexRoute = ProductsIndexImport.update({
-  path: '/products/',
+const NotesIndexRoute = NotesIndexImport.update({
+  path: '/notes/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const ProductsProductIDRoute = ProductsProductIDImport.update({
-  path: '/products/$productID',
+const NotesAddRoute = NotesAddImport.update({
+  path: '/notes/add',
   getParentRoute: () => rootRoute,
+} as any)
+
+const NotesNoteIdRoute = NotesNoteIdImport.update({
+  path: '/notes/$noteId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const NotesNoteIdEditRoute = NotesNoteIdEditImport.update({
+  path: '/edit',
+  getParentRoute: () => NotesNoteIdRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -40,13 +52,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/products/$productID': {
-      preLoaderRoute: typeof ProductsProductIDImport
+    '/notes/$noteId': {
+      preLoaderRoute: typeof NotesNoteIdImport
       parentRoute: typeof rootRoute
     }
-    '/products/': {
-      preLoaderRoute: typeof ProductsIndexImport
+    '/notes/add': {
+      preLoaderRoute: typeof NotesAddImport
       parentRoute: typeof rootRoute
+    }
+    '/notes/': {
+      preLoaderRoute: typeof NotesIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/notes/$noteId/edit': {
+      preLoaderRoute: typeof NotesNoteIdEditImport
+      parentRoute: typeof NotesNoteIdImport
     }
   }
 }
@@ -55,8 +75,9 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  ProductsProductIDRoute,
-  ProductsIndexRoute,
+  NotesNoteIdRoute.addChildren([NotesNoteIdEditRoute]),
+  NotesAddRoute,
+  NotesIndexRoute,
 ])
 
 /* prettier-ignore-end */
