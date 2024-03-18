@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, FC } from "react";
+import { COLORS_TEXT } from "./colors";
 
 type ButtonType = "default" | "border" | "dark";
 
@@ -18,6 +19,12 @@ export const Button: FC<Props> = function Button(props) {
     bgButton = "border bg-white border-gray-400";
     textColor = "text-gray-800";
   }
+
+  if (props.disabled) {
+    bgButton = "bg-gray-300";
+    textColor = COLORS_TEXT.secondary200;
+  }
+
   return (
     <button
       {...rest}
