@@ -4,9 +4,11 @@ import { Fragment } from "react";
 import { Header } from "../components/Header";
 import { Typography } from "../shared/ui/Typography";
 import { COLORS_TEXT } from "../shared/ui/colors";
+import { NotesProvider } from "../pages/notes/store/NotesProvider";
 
 export const Route = createRootRoute({
   component: () => {
+    // разделяет URL на массив
     const matches = useMatches();
     const title = matches[matches.length - 1].staticData.title;
     return (
@@ -25,10 +27,12 @@ export const Route = createRootRoute({
           )}
         </Fragment>
 
-        <div className="container mx-auto p-2">
-          {/* Вывод компонентов */}
-          <Outlet />
-        </div>
+        {/* Вывод компонентов */}
+        <NotesProvider>
+          <div className="container mx-auto p-2">
+            <Outlet />
+          </div>
+        </NotesProvider>
         {/* Панель разработчика */}
         <TanStackRouterDevtools />
       </>

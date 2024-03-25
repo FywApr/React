@@ -2,39 +2,62 @@ import { FC } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import { Button } from "../../shared/ui/Button";
-import Note, { notes } from "./Note";
-import { Link, useNavigate } from "@tanstack/react-router";
+import Note, { TNote, notes } from "./model/Note";
+import { useNavigate, useRouter } from "@tanstack/react-router";
+import { useNotes } from "./store/NotesProvider";
 
-interface Props {}
+interface Props {
+  note?: TNote;
+}
 
 type Form = {
   title: string;
   description: string;
 };
 
-export const NoteForm: FC<Props> = function NoteForm() {
-  let navigate = useNavigate()
+export const NoteForm: FC<Props> = function NoteForm(props) {
+  const { addNote } = useNotes();
+  const { updateNote } = useNotes();
+  const { history } = useRouter();
+
+  // // меняет маршрут
+  // let navigate = useNavigate();
   const {
     handleSubmit,
     control,
     formState: { isValid },
   } = useForm<Form>({
     defaultValues: {
-      title: "",
-      description: "",
+      title: props.note?.title ?? "",
+      description: props.note?.description ?? "",
     },
   });
+
   return (
     <form
       className="gap-6 flex flex-col pt-4"
       onSubmit={handleSubmit((form) => {
-        let note = new Note(form);
-        notes.push(note);
-        navigate({to: "/notes"})
+        // Новая версия
+
+        if (props.note) {
+          updateNote({ id: props.note.id, ...form });
+          history.back();
+        } else {
+          addNote(form);
+          history.back();
+        }
+
+        // Старая версия
+
+        // let note = new Note(form);
+        // notes.push(note);
+        // navigate({ to: "/notes" });
       })}
     >
+      {/* Контролирует работу другого компонента */}
       <Controller
         name={"title"}
+        // con
         control={control}
         rules={{
           required: "Это поле обязательное",
@@ -74,8 +97,10 @@ export const NoteForm: FC<Props> = function NoteForm() {
           />
         )}
       ></Controller>
+
+
       <Button type="submit" disabled={!isValid}>
-        {"Добавить"}
+        {props.note ? "Сохранить" : "Добавить"}
       </Button>
     </form>
   );

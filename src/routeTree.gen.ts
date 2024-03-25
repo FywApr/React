@@ -15,7 +15,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as NotesIndexImport } from './routes/notes/index'
 import { Route as NotesAddImport } from './routes/notes/add'
 import { Route as NotesNoteIdImport } from './routes/notes/$noteId'
-import { Route as NotesNoteIdEditImport } from './routes/notes/$noteId.edit'
+import { Route as NotesEditNoteIdImport } from './routes/notes/edit.$noteId'
 
 // Create/Update Routes
 
@@ -39,9 +39,9 @@ const NotesNoteIdRoute = NotesNoteIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const NotesNoteIdEditRoute = NotesNoteIdEditImport.update({
-  path: '/edit',
-  getParentRoute: () => NotesNoteIdRoute,
+const NotesEditNoteIdRoute = NotesEditNoteIdImport.update({
+  path: '/notes/edit/$noteId',
+  getParentRoute: () => rootRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -64,9 +64,9 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesIndexImport
       parentRoute: typeof rootRoute
     }
-    '/notes/$noteId/edit': {
-      preLoaderRoute: typeof NotesNoteIdEditImport
-      parentRoute: typeof NotesNoteIdImport
+    '/notes/edit/$noteId': {
+      preLoaderRoute: typeof NotesEditNoteIdImport
+      parentRoute: typeof rootRoute
     }
   }
 }
@@ -75,9 +75,10 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  NotesNoteIdRoute.addChildren([NotesNoteIdEditRoute]),
+  NotesNoteIdRoute,
   NotesAddRoute,
   NotesIndexRoute,
+  NotesEditNoteIdRoute,
 ])
 
 /* prettier-ignore-end */

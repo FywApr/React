@@ -1,8 +1,10 @@
 import { formatDistanceToNow } from "date-fns";
 
-type TNote = {
+export type TNote = {
+  id: number,
   title: string;
   description: string;
+  date: Date;
 };
 
 export default class Note {
